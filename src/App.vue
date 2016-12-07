@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-header></v-header>
-		<div class="tab">
+		<div class="tab border-1px">
 			<div class="tab-item">
 				<router-link to="/goods" class="tab-link">商品</router-link>
 			</div>
@@ -27,11 +27,14 @@
 
 <style lang="scss" scoped>
 //scoped创建独立命名空间
+@import "./common/scss/mixin.scss";
+
 .tab{
 	display:flex;
 	width:"100%";
 	height:40px;
 	line-height:40px;
+	@include border-1px(rgba(7,17,27,0.1));
 	.tab-item{
 		flex:1;
 		text-align:center;
