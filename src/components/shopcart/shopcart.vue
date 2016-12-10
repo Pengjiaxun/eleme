@@ -24,10 +24,7 @@
 			selectFoods:{
 				type:Array,
 				default() {
-					return [{
-						price:10,
-						count:1
-					}];
+					return [{}];
 				}
 			},
 			deliveryPrice:{
@@ -63,7 +60,6 @@
 					return `¥${this.minPrice}元起送`;
 				}else if(this.totalPrice<this.minPrice){
 					let diff = this.minPrice - this.totalPrice;
-					console.log(diff);
 					return `还差¥${diff}元起送`;
 				}else{
 					return '去结算';
