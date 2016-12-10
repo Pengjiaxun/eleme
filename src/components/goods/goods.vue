@@ -35,12 +35,14 @@
 				</li>
 			</ul>
 		</div>
+		<shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
 	</div>
 </template>
 
 <script>
 	import icon from 'components/icon/icon';
-	import  BScroll from 'better-scroll';
+	import BScroll from 'better-scroll';
+	import shopcart from 'components/shopcart/shopcart';
 
 	const ERR_OK = 0;
 
@@ -87,7 +89,7 @@
 				if(!event._constructed){
 					return;
 				}
-				this.foodScroll.scrollTo(0,-this.listHeight[index],300);
+				this.foodScroll.scrollTo(0,-this.listHeight[index]);
 				this.scrollY = this.listHeight[index];
 			},
 			_initScroll() {
@@ -113,7 +115,8 @@
 			}
 		},
 		components:{
-			icon
+			icon,
+			shopcart
 		}
 	};
 </script>
