@@ -6,7 +6,7 @@
 			</div>
 		</transition>
 		<div class="cart-count" v-show="food.count>0" key="cart-count">{{food.count}}</div>
-		<div class="cart-add icon-add_circle" @click="addCart"></div>
+		<div class="cart-add icon-add_circle" @click.stop="addCart($event)"></div>
 	</div>
 </template>
 
@@ -29,6 +29,7 @@
 				}else{
 					this.food.count++;
 				}
+				this.$parent.$emit('cart.add',event.target);
 			},
 			decrease(event){
 				if(!event._constructed){
@@ -38,8 +39,6 @@
 					this.food.count--;
 				}
 			}
-		},
-		created(){
 		}
 	};
 </script>
@@ -48,10 +47,10 @@
 	.cartcontrol{
 		font-size:0;
 		.slide-fade-enter-active {
-			transition: all 0.4s ease;
+			transition: all 0.3s ease;
 		}
 		.slide-fade-leave-active {
-			transition: all 0.4s ease;
+			transition: all 0.3s ease;
 			transform:translate3D(24px,0,0);
 		}
 		.slide-fade-enter,.slide-fade-leave-active {
@@ -71,7 +70,7 @@
 				line-height:24px;
 				font-size:24px;
 				color:rgb(0,160,220);
-				transition:all 0.4s linear;
+				transition:all 0.3s linear;
 				transform:rotate(0);
 			}
 		}

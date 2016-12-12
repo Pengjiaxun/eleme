@@ -38,7 +38,7 @@
 				</li>
 			</ul>
 		</div>
-		<shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+		<shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
 	</div>
 </template>
 
@@ -98,14 +98,21 @@
 					});
 				}
 			});
+			this.$on('cart.add',this.cartAdd);
 		},
 		methods:{
 			selectMenu(index,event) {
 				if(!event._constructed){
 					return;
 				}
-				this.foodScroll.scrollTo(0,-this.listHeight[index]);
+				this.foodScroll.scrollTo(0,-this.listHeight[index],300);
 				this.scrollY = this.listHeight[index];
+			},
+			_drop(target) {
+				//体验优化，异步执行下落动画
+				this.$nextTick(() => {
+					this.$refs.shopcart.drop(target);
+				});
 			},
 			_initScroll() {
 				this.menuScroll = new BScroll(this.$refs.menuWrapper,{
@@ -128,6 +135,9 @@
 					height += item.clientHeight;
 					this.listHeight.push(height);
 				}
+			},
+			cartAdd(target) {
+				this._drop(target);
 			}
 		},
 		components:{
