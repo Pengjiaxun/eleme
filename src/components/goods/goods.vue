@@ -101,19 +101,6 @@
 			this.$on('cart.add',this.cartAdd);
 		},
 		methods:{
-			selectMenu(index,event) {
-				if(!event._constructed){
-					return;
-				}
-				this.foodScroll.scrollTo(0,-this.listHeight[index],300);
-				this.scrollY = this.listHeight[index];
-			},
-			_drop(target) {
-				//体验优化，异步执行下落动画
-				this.$nextTick(() => {
-					this.$refs.shopcart.drop(target);
-				});
-			},
 			_initScroll() {
 				this.menuScroll = new BScroll(this.$refs.menuWrapper,{
 					click: true
@@ -124,7 +111,7 @@
 				});
 				this.foodScroll.on('scroll',(pos) => {
 					this.scrollY = Math.abs(Math.round(pos.y));
-				})
+				});
 			},
 			_calculateHeight() {
 				let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook');
@@ -136,8 +123,21 @@
 					this.listHeight.push(height);
 				}
 			},
+			selectMenu(index,event) {
+				if(!event._constructed){
+					return;
+				}
+				this.foodScroll.scrollTo(0,-this.listHeight[index]);
+				this.scrollY = this.listHeight[index];
+			},
 			cartAdd(target) {
 				this._drop(target);
+			},
+			_drop(target) {
+				//体验优化，异步执行下落动画
+				this.$nextTick(() => {
+					this.$refs.shopcart.drop(target);
+				});
 			}
 		},
 		components:{
