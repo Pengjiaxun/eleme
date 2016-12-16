@@ -1,7 +1,7 @@
 <template>
 	<div class="cartcontrol">
 		<transition name="slide-fade">
-			<div class="cart-decrease " v-show="food.count>0" @click="decrease">
+			<div class="cart-decrease " v-show="food.count>0" @click.stop="decrease">
 				<div class="inner icon-remove_circle_outline"></div>
 			</div>
 		</transition>

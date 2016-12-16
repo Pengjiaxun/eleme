@@ -166,7 +166,7 @@
 				if(this.totalPrice < this.minPrice){
 					return;
 				}
-				window.alert('zhifu');
+				window.alert('支付总价 '+this.totalPrice+" 元");
 			}
 		},
 		computed:{
