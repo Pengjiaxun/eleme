@@ -95,13 +95,17 @@
 		},
 		watch:{
 			'seller'(){
-				this._initScroll();
-				this._initPics();
+				this.$nextTick(() => {
+					this._initScroll();
+					this._initPics();
+				});
 			}
 		},
 		ready(){
-			this._initScroll();
-			this._initPics();
+			this.$nextTick(() => {
+				this._initScroll();
+				this._initPics();
+			});
 		},
 		methods:{
 			toggleFavorite(event){
